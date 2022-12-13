@@ -1,0 +1,31 @@
+اال back ground فال excel
+add print conscript model
+add rateb ali details to the page
+remove un-needed code from the code base
+5-اال back ground فال excel
+editing hafza of highlevel in conscriptes
+remove un-needed code from the code base
+errors in tmam_eltasgel 
+refactoring distibuted suggest
+
+
+///////////////use enrolled
+building issues 
+
+
+=================================================================
+3- editor dialog sometimes cannot be closed even without searchLoading = true
+=================================================================
+10 - recommandtion enrolled should be like recommandtion
+=====================================================
+pre unites doesn't search with id
+should add close button in transport licenseadd clear data in editor
+id can't be longer than 13
+
+
+rateb 3ali relatives 
+
+
+=============================================
+registeration essurance knowledge level doesn't appear
+

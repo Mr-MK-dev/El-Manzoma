@@ -1,0 +1,327 @@
+{
+  "moqadem": {
+    "title": "الأساسي",
+    "username": "sa",
+    "password": "123456",
+    "host": "192.168.1.62",
+    "dialect": "mssql",
+    "seederStorage": "json",
+    "seederStoragePath": "sequelize-data.json",
+    "seederStorageTableName": "SequelizeData",
+    "dialectOptions": {
+      "options": {
+        "encrypt": false,
+        "port": 1444,
+        "trustServerCertificate": true,
+        "requestTimeout": 300000
+      }
+    },
+    "define": {
+      "timestamps": false
+    },
+    "logging": true
+  },
+  "aziz": {
+    "title": "local",
+    "username": "SA",
+    "password": "12345678",
+    "host": "localhost",
+    "dialect": "mssql",
+    "seederStorage": "json",
+    "seederStoragePath": "sequelize-data.json",
+    "seederStorageTableName": "SequelizeData",
+    "logging": true,
+    "dialectOptions": {
+      "options": {
+        "--instanceName": "SQLEXPRESS",
+        "encrypt": false,
+
+        "trustServerCertificate": true,
+        "requestTimeout": 30000
+      }
+    }
+  },
+  "moaz": {
+    "title": "local",
+    "username": "zozo",
+    "password": "12345678",
+    "host": "localhost",
+    "dialect": "mssql",
+    "seederStorage": "json",
+    "seederStoragePath": "sequelize-data.json",
+    "seederStorageTableName": "SequelizeData",
+    "logging": true,
+    "dialectOptions": {
+      "options": {
+        "--instanceName": "SQLEXPRESS",
+        "encrypt": false,
+
+        "trustServerCertificate": true,
+        "requestTimeout": 30000
+      }
+    }
+  },
+  "essam": {
+    "title": "local",
+    "username": "sasa",
+    "password": "12345678",
+    "host": "localhost",
+    "dialect": "mssql",
+    "seederStorage": "json",
+    "seederStoragePath": "sequelize-data.json",
+    "seederStorageTableName": "SequelizeData",
+    "logging": true,
+    "dialectOptions": {
+      "options": {
+        "--instanceName": "MAHMOUDESSAM",
+        "encrypt": false,
+        "port": 1444,
+        "trustServerCertificate": true,
+        "requestTimeout": 30000
+      }
+    }
+  },
+  "local": {
+    "title": "local",
+    "username": "SA",
+    "password": "nader@55",
+    "host": "localhost",
+    "dialect": "mssql",
+    "seederStorage": "json",
+    "seederStoragePath": "sequelize-data.json",
+    "seederStorageTableName": "SequelizeData",
+    "dialectOptions": {
+      "options": {
+        "--instanceName": "SQLEXPRESS",
+        "encrypt": false,
+        "trustServerCertificate": true,
+        "requestTimeout": 30000
+      }
+    },
+    "define": {
+      "timestamps": false
+    },
+    "logging": true
+  },
+  "karam": {
+    "title": "local",
+    "username": "sa",
+    "password": "123456",
+    "host": "localhost",
+    "dialect": "mssql",
+    "seederStorage": "json",
+    "seederStoragePath": "sequelize-data.json",
+    "seederStorageTableName": "SequelizeData",
+    "dialectOptions": {
+      "options": {
+        "--instanceName": "SQLEXPRESS",
+        "encrypt": false,
+        "port": 1444,
+        "trustServerCertificate": true,
+        "requestTimeout": 30000
+      }
+    },
+    "define": {
+      "timestamps": false
+    },
+    "logging": true
+  },
+  "jimi": {
+    "title": "local",
+    "username": "sa",
+    "password": "jimi@we!15",
+    "host": "localhost",
+    "dialect": "mssql",
+    "seederStorage": "json",
+    "seederStoragePath": "sequelize-data.json",
+    "seederStorageTableName": "SequelizeData",
+    "dialectOptions": {
+      "options": {
+        "--instanceName": "MSSQLSERVER",
+        "encrypt": false,
+        "trustServerCertificate": true,
+        "requestTimeout": 30000
+      }
+    },
+    "define": {
+      "timestamps": false
+    },
+    "logging": true
+  },
+  "mandour": {
+    "title": "local",
+    "host": "localhost",
+    "username": "sa",
+    "password": "5650072",
+    "dialect": "mssql",
+    "seederStorage": "json",
+    "seederStoragePath": "sequelize-data.json",
+    "seederStorageTableName": "SequelizeData",
+    "dialectOptions": {
+      "options": {
+        "port": 1444,
+        "trustedConnection": true,
+        "--instanceName": "AFRAAD",
+        "encrypt": false,
+        "trustServerCertificate": true,
+        "requestTimeout": 30000
+      }
+    },
+    "define": {
+      "timestamps": false
+    },
+    "logging": true
+  },
+  "nozom": {
+    "title": "النظم",
+    "username": "SA",
+    "password": "p@ssword",
+    "host": "192.9.201.15",
+    "dialect": "mssql",
+    "seederStorage": "json",
+    "seederStoragePath": "sequelize-data.json",
+    "seederStorageTableName": "SequelizeData",
+    "dialectOptions": {
+      "options": {
+        "--instanceName": "SQLEXPRESS",
+        "encrypt": false,
+        "trustServerCertificate": true,
+        "requestTimeout": 30000
+      }
+    },
+    "define": {
+      "timestamps": false
+    },
+    "logging": false
+  },
+  "moqadem_laptop": {
+    "title": "لابتوب المقدم",
+    "username": "sa",
+    "password": "a@sh",
+    "host": "DESKTOP-LJ8KU1B",
+    "dialect": "mssql",
+    "seederStorage": "json",
+    "seederStoragePath": "sequelize-data.json",
+    "seederStorageTableName": "SequelizeData",
+    "dialectOptions": {
+      "options": {
+        "instanceName": "SHABANA",
+        "encrypt": false,
+        "trustServerCertificate": true,
+        "requestTimeout": 30000
+      }
+    },
+    "define": {
+      "timestamps": false
+    },
+    "logging": false
+  },
+  "dash": {
+    "title": "داش",
+    "username": "sa",
+    "password": "a@sh",
+    "host": "DESKTOP-BPD15NN",
+    "dialect": "mssql",
+    "seederStorage": "json",
+    "seederStoragePath": "sequelize-data.json",
+    "seederStorageTableName": "SequelizeData",
+    "dialectOptions": {
+      "options": {
+        "--instanceName": "DASHSERVER",
+        "encrypt": false,
+        "trustServerCertificate": true,
+        "requestTimeout": 30000
+      }
+    },
+    "define": {
+      "timestamps": false
+    },
+    "logging": false,
+    "logging_comment": "Remove the word 'comment', add false. just like the others above"
+  },
+  "mohsen": {
+    "title": "محسن",
+    "username": "sa",
+    "password": "M0h$en",
+    "host": "MOHSEN",
+    "dialect": "mssql",
+    "seederStorage": "json",
+    "seederStoragePath": "sequelize-data.json",
+    "seederStorageTableName": "SequelizeData",
+    "dialectOptions": {
+      "options": {
+        "--instanceName": "MSSQLSERVER",
+        "encrypt": false,
+        "trustServerCertificate": true,
+        "requestTimeout": 30000
+      }
+    },
+    "define": {
+      "timestamps": false
+    },
+    "logging": false
+  },
+  "saad": {
+    "title": "محمد سعد",
+    "username": "mohmedelwany",
+    "password": "12345MRELWANY",
+    "host": "DESKTOP-I0IIKND",
+    "dialect": "mssql",
+    "seederStorage": "json",
+    "seederStoragePath": "sequelize-data.json",
+    "seederStorageTableName": "SequelizeData",
+    "dialectOptions": {
+      "options": {
+        "instanceName": "ELWANY",
+        "encrypt": false,
+        "trustServerCertificate": true,
+        "requestTimeout": 30000
+      }
+    },
+    "define": {
+      "timestamps": false
+    },
+    "logging": false
+  },
+  "beltagy": {
+    "title": "بلتاجي",
+    "username": "sa",
+    "password": "123",
+    "host": "DEMO",
+    "dialect": "mssql",
+    "seederStorage": "json",
+    "seederStoragePath": "sequelize-data.json",
+    "seederStorageTableName": "SequelizeData",
+    "dialectOptions": {
+      "options": {
+        "instanceName": "DEMO",
+        "encrypt": false,
+        "trustServerCertificate": true,
+        "requestTimeout": 30000
+      }
+    },
+    "define": {
+      "timestamps": false
+    },
+    "logging": false
+  },
+  "kareem": {
+    "title": "kemooo",
+    "username": "sa",
+    "password": "123",
+    "host": "LAPTOP-8OA9AFOQ",
+    "dialect": "mssql",
+    "seederStorage": "json",
+    "seederStoragePath": "sequelize-data.json",
+    "seederStorageTableName": "SequelizeData",
+    "dialectOptions": {
+      "options": {
+        "instanceName": "KAREEM",
+        "encrypt": false,
+        "trustServerCertificate": true,
+        "requestTimeout": 30000
+      }
+    },
+    "logging": false
+  }
+}

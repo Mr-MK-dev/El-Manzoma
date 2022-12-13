@@ -1,0 +1,1 @@
+ALTER TABLE NEWAFRAAD.dbo.inventoryLevelup ADD ID_KEY int IDENTITY(0,1) NOT NULL;

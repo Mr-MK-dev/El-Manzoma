@@ -1,0 +1,408 @@
+<template>
+  <div class="Categories_Dailes">
+    <search-bulider
+      :fields="mainTable.headers"
+      :selects="selects"
+      @on-search="findItems"
+      :search="search"
+      :clearOption="true"
+      title="بحث متقدم في الراتب العالي"
+      :addButton="false"
+    />
+    <v-card>
+      <table-bulider
+        :headers="mainTable.headers"
+        :printer="mainTable.printer"
+        :items="mainTable.items"
+        :loading="searchLoading"
+        :title="'نتائج اليومية عددية للراتب العالي'"
+      >
+      </table-bulider>
+    </v-card>
+  </div>
+</template>
+
+<style></style>
+
+<script>
+const constants = require("../../../../../Constant").default;
+const types = require("../../../../../server-sequelize/reciever/af/sections/tasgeel/reports/types")
+  .default;
+const lodash = require("lodash");
+const displayTypes = types.displayTypes;
+
+const basicHeaders = [
+  {
+    text: "نوع العرض",
+    value: "Type",
+    searchValue: "Type",
+    sortable: true,
+    type: "select",
+    inSearch: true,
+    inTable: false,
+    inModel: false,
+    sort: 1
+  },
+  {
+    text: "الاتجاه",
+    value: "Directionforunit",
+    sortable: true,
+    inTable: true,
+    multiple: true,
+    sort: 1
+  },
+  {
+    text: "الوحدة",
+    value: "Unit",
+    searchValue: "unitIds",
+    sortable: true,
+    type: "select",
+    inSearch: false,
+    inTable: true,
+    inModel: false,
+    multiple: true,
+    sort: 1
+  },
+  {
+    text: "الواجب المدرب عليه",
+    value: "Duty",
+    searchValue: "DutyID",
+    sortable: true,
+    type: "select",
+    inSearch: true,
+    inTable: false,
+    inModel: false,
+    multiple: true,
+    sort: 1
+  },
+  {
+    text: "العمل القائم به",
+    value: "CurrentJob",
+    searchValue: "CurrentJobID",
+    sortable: true,
+    type: "select",
+    inSearch: true,
+    inTable: false,
+    inModel: false,
+    multiple: false,
+    sort: 1
+  },
+  {
+    text: "التجميعات القتالية",
+    value: "Collection",
+    searchValue: "collections",
+    sortable: true,
+    type: "select",
+    inSearch: false,
+    inTable: false,
+    inModel: false,
+    multiple: false,
+    sort: 1
+  },
+  {
+    text: "المرتب",
+    value: "mortab",
+    searchValue: "mortab",
+    sortable: true,
+    type: "select",
+    inSearch: false,
+    inTable: true,
+    inModel: false,
+    multiple: true,
+    sort: 1
+  },
+  {
+    text: "السياسة",
+    value: "saisa",
+    searchValue: "saisa",
+    sortable: true,
+    type: "select",
+    inSearch: false,
+    inTable: true,
+    inModel: false,
+    multiple: true,
+    sort: 1
+  },
+  // {
+  //   text: "عدد النقط",
+  //   value: "pointsNumber",
+  //   searchValue: "pointsNumber",
+  //   sortable: true,
+  //   type: "select",
+  //   inSearch: false,
+  //   inTable: true,
+  //   inModel: false,
+  //   multiple: true,
+  //   sort: 1
+  // },
+  {
+    text: "الموجود قبل النشرة",
+    value: "before",
+    searchValue: "before",
+    sortable: true,
+    type: "select",
+    inSearch: false,
+    inTable: true,
+    inModel: false,
+    multiple: true,
+    sort: 1
+  },
+  {
+    text: "السحب",
+    value: "transfered",
+    searchValue: "transfered",
+    sortable: true,
+    type: "select",
+    inSearch: false,
+    inTable: true,
+    inModel: false,
+    multiple: true,
+    sort: 1
+  },
+  {
+    text: "الدعم",
+    value: "joined",
+    searchValue: "joined",
+    sortable: true,
+    type: "select",
+    inSearch: false,
+    inTable: true,
+    inModel: false,
+    multiple: true,
+    sort: 1
+  },
+  {
+    text: "الموجود بعد النشرة",
+    value: "after",
+    searchValue: "after",
+    sortable: true,
+    type: "select",
+    inSearch: false,
+    inTable: true,
+    inModel: false,
+    multiple: true,
+    sort: 1
+  }
+];
+
+export default {
+  name: "UnitesWithDuty",
+  props: {
+    items: {
+      default: []
+    }
+  },
+  async mounted() {
+    await this.init();
+    await this.getRecuEndDateOptions();
+  },
+  data: () => ({
+    search: {
+      SoldierCategories: constants.dailesSoliderCategories
+    },
+    searchLoading: false,
+    mainTable: {
+      headers: [...basicHeaders, ...[]],
+      items: [],
+      printer: {}
+    },
+    componentName: "UnitesWithPointsStats",
+    selects: {
+      directions: {
+        text: "Name",
+        value: "Name",
+        table: "Sectors"
+      },
+      SoldierCategories: {
+        text: "text",
+        value: "text",
+        data: constants.dailesSoliderCategories.map(text => ({
+          text
+        }))
+      },
+      collections: {
+        text: "Name",
+        value: "ID_KEY",
+        table: "UnitCollections"
+      },
+      unitIds: {
+        table: "Unit",
+        value: "UnitID",
+        text: "Unit"
+      },
+      DutyID: {
+        table: "Duty",
+        value: "DutyID",
+        text: "Duty"
+      },
+      CurrentJobID: {
+        table: "Jobs",
+        value: "ID_KEY",
+        text: "Name"
+      },
+      Type: {
+        text: "text",
+        value: "value",
+        data: [
+          {
+            text: "التجميعات قتالية",
+            value: displayTypes.collections
+          },
+          {
+            text: "الوحدات محددة",
+            value: displayTypes.unites
+          }
+        ]
+      },
+      RecuEndDate: {
+        text: "text",
+        value: "value",
+        data: []
+      },
+      Weapon: {
+        table: "Weapon",
+        text: "Weapon",
+        value: "Weapon"
+      }
+    }
+  }),
+  watch: {
+    "search.Type"(newValue) {
+      const unitFeildIndex = this.mainTable.headers.findIndex(
+        ele => ele.value == "Unit"
+      );
+
+      const collectionFeildIndex = this.mainTable.headers.findIndex(
+        ele => ele.value == "Collection"
+      );
+      this.mainTable.headers[unitFeildIndex].inSearch = false;
+      this.mainTable.headers[collectionFeildIndex].inSearch = false;
+      // display right condations
+      if (newValue == displayTypes.unites)
+        this.mainTable.headers[unitFeildIndex].inSearch = true;
+
+      if (newValue == displayTypes.collections) {
+        this.mainTable.headers[collectionFeildIndex].inSearch = true;
+      }
+    },
+    async "search.collections"(newValue) {
+      console.log(this.search.Collection);
+      if (this.search.Type == displayTypes.collections) {
+        let data = await this.api("global/get_all", {
+          table: "UnitCollectionPivot",
+          where: { CollectionId: newValue }
+        });
+        this.$set(
+          this.search,
+          "unitIds",
+          data.data.map(ele => ele.UnitID)
+        );
+        console.log(data.data.map(ele => ele.UnitID));
+      }
+    }
+  },
+  methods: {
+    async findItems(filters) {
+      this.$set(this, "search", filters);
+      this.$set(this, "searchLoading", true);
+      this.$set(this.mainTable, "items", []);
+      if (!this.search.CurrentJobID) {
+        return this.showError("يجب إختيار عمل قائم به أولا");
+      }
+      try {
+        const unites = await this.api("sections/tasgeel/reports/getUnits", {
+          ...this.search
+        });
+
+        let items = [];
+        for (const unit of unites.data) {
+          const rateb = await this.api("global/get_all", {
+            table: "Rateb",
+            where: this.cleanObject({
+              UnitID: unit.UnitID,
+              Status: `بالخدمة`,
+              CurrentJobID: this.search.CurrentJobID
+            })
+          });
+          const mortabs = await this.api("global/get_all", {
+            table: "MortabatDuties",
+            where: this.cleanObject({
+              UnitID: unit.UnitID,
+              ServiceType: `راتب عالى`,
+              DutyID: this.search.DutyID ? { $in: this.search.DutyID } : null
+            })
+          });
+          const UnitObj = await this.api("global/get_one", {
+            table: "Unit",
+            where: { UnitID: unit.UnitID }
+          });
+          const points = await this.api("global/get_all", {
+            table: "PointHub",
+            where: {
+              Unit_ID: unit.UnitID
+            },
+            include: [
+              {
+                model: "Point"
+              }
+            ]
+          });
+          items.push({
+            ...UnitObj.data,
+            mortab: lodash.sumBy(mortabs.data, ele => ele.Moratab),
+            saisa: lodash.sumBy(mortabs.data, ele => ele.Siasa),
+            pointsNumber: points.data.length,
+            before: rateb.data.length,
+            transfered: this.items.filter(
+              ele =>
+                ele.OldUnitID === unit.UnitID &&
+                ele.Rateb.CurrentJobID === this.search.CurrentJobID
+            ).length,
+            joined: this.items.filter(
+              ele =>
+                ele.TransferedUnitID === unit.UnitID &&
+                ele.Rateb.CurrentJobID === this.search.CurrentJobID
+            ).length,
+            after:
+              rateb.data.length -
+              this.items.filter(
+                ele =>
+                  ele.OldUnitID === unit.UnitID &&
+                  ele.Rateb.CurrentJobID === this.search.CurrentJobID
+              ).length +
+              this.items.filter(
+                ele =>
+                  ele.TransferedUnitID === unit.UnitID &&
+                  ele.Rateb.CurrentJobID === this.search.CurrentJobID
+              ).length
+          });
+        }
+
+        items.push({
+          Unit: "الإجمالي",
+          mortab: lodash.sumBy(items, ele => ele.mortab),
+          saisa: lodash.sumBy(items, ele => ele.saisa),
+          before: lodash.sumBy(items, ele => ele.before),
+          transfered: lodash.sumBy(items, ele => ele.transfered),
+          joined: lodash.sumBy(items, ele => ele.joined),
+          after: lodash.sumBy(items, ele => ele.after)
+        });
+        console.log(items);
+        this.$set(this.mainTable, "items", items);
+        this.$set(this.mainTable, "printer", {
+          data: this.mainTable.items,
+          excelKey: "data",
+          excelHeaders: this.mainTable.headers.filter(f => f.inTable),
+          hasParent: true
+        });
+      } catch (e) {
+        console.log(e);
+        this.showError("حدث خطأ أثناء احضار البيانات من قاعدة البيانات");
+      }
+
+      this.$set(this, "searchLoading", false);
+    }
+  }
+};
+</script>
+e>

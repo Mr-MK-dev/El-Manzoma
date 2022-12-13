@@ -1,0 +1,4 @@
+ALTER TABLE NEWAFRAAD.dbo.Unit ADD isSpecial bit DEFAULT 0 NULL;
+ALTER TABLE NEWAFRAAD.dbo.Unit ADD extraProfitType nvarchar(100) NULL;
+ALTER TABLE NEWAFRAAD.dbo.Unit ADD isHardWork bit DEFAULT 0 NULL;
+ALTER TABLE NEWAFRAAD.dbo.TransferList ADD isFilled bit DEFAULT 0 NULL;

@@ -1,0 +1,227 @@
+DropSelectionTable
+=======================
+then create the new one
+=======================
+-- NEWAFRAAD.dbo.Selections definition
+
+-- Drop table
+
+-- DROP TABLE NEWAFRAAD.dbo.Selections;
+
+CREATE TABLE NEWAFRAAD.dbo.Selections (
+	IDKey int IDENTITY(1,1) NOT NULL,
+	Name nvarchar COLLATE Arabic_CI_AS NULL,
+	TripleNo nvarchar(13) COLLATE Arabic_CI_AS NOT NULL,
+	RecuStage nvarchar COLLATE Arabic_CI_AS NULL,
+	RecuRigion nvarchar(20) COLLATE Arabic_CI_AS NULL,
+	KnowledgeLevel nvarchar(12) COLLATE Arabic_CI_AS NULL,
+	WeaponIDs nvarchar COLLATE Arabic_CI_AS NULL,
+	Recommander nvarchar(120) COLLATE Arabic_CI_AS NULL,
+	SelectedWeapon int NULL,
+	CityID int NULL,
+	SelectionID int NULL,
+	CONSTRAINT PK__Selectio__FE1D897AAE686842 PRIMARY KEY (IDKey,TripleNo)
+);
+
+
+-- NEWAFRAAD.dbo.Selections foreign keys
+
+ALTER TABLE NEWAFRAAD.dbo.Selections ADD CONSTRAINT FK__Selection__CityI__7306036C FOREIGN KEY (CityID) REFERENCES NEWAFRAAD.dbo.City(CityID) ON DELETE SET NULL;
+ALTER TABLE NEWAFRAAD.dbo.Selections ADD CONSTRAINT FK__Selection__Selec__73FA27A5 FOREIGN KEY (SelectionID) REFERENCES NEWAFRAAD.dbo.SelectionType(SelectionID);
+=================================================================================================================================================================
+drop  table following rigion and  create the new one and insert values from migration
+=================================================
+-- NEWAFRAAD.dbo.FollowingRigion definition
+
+-- Drop table
+
+-- DROP TABLE NEWAFRAAD.dbo.FollowingRigion;
+
+CREATE TABLE NEWAFRAAD.dbo.FollowingRigion (
+	FollowRigionID int IDENTITY(1,1) NOT NULL,
+	FollowRigionName nvarchar(100) COLLATE Arabic_CI_AS NULL,
+	CONSTRAINT PK__Followin__06EFDDD47A8729A3 PRIMARY KEY (FollowRigionID)
+);
+=======================================================================================================================================================================
+create this new table 
+=====================
+-- NEWAFRAAD.dbo.SoldierSecuritySituations definition
+
+-- Drop table
+
+-- DROP TABLE NEWAFRAAD.dbo.SoldierSecuritySituations;
+
+CREATE TABLE NEWAFRAAD.dbo.SoldierSecuritySituations (
+	SituationID int IDENTITY(1,1) NOT NULL,
+	ID nvarchar(13) COLLATE Arabic_CI_AS NOT NULL,
+	Situation nvarchar(100) COLLATE Arabic_CI_AS NULL,
+	SituationDate date NULL,
+	Notes nvarchar(100) COLLATE Arabic_CI_AS NULL,
+	CONSTRAINT PK__SoldierS__7E44DA788FFA19BB PRIMARY KEY (SituationID)
+);
+
+
+-- NEWAFRAAD.dbo.SoldierSecuritySituations foreign keys
+
+ALTER TABLE NEWAFRAAD.dbo.SoldierSecuritySituations ADD CONSTRAINT FK__SoldierSecur__ID__1BB31344 FOREIGN KEY (ID) REFERENCES NEWAFRAAD.dbo.Soldier(ID);
+=========================================================================================================================================================================
+create this new table
+=====================
+-- NEWAFRAAD.dbo.OfficerSoldierRecommendation definition
+
+-- Drop table
+
+-- DROP TABLE NEWAFRAAD.dbo.OfficerSoldierRecommendation;
+
+CREATE TABLE NEWAFRAAD.dbo.OfficerSoldierRecommendation (
+	RecommendationID int IDENTITY(1,1) NOT NULL,
+	tripleNo nvarchar(100) COLLATE Arabic_CI_AS NULL,
+	Name nvarchar(100) COLLATE Arabic_CI_AS NULL,
+	Recommender nvarchar(100) COLLATE Arabic_CI_AS NULL,
+	Recommended nvarchar(100) COLLATE Arabic_CI_AS NOT NULL,
+	Status nvarchar(100) COLLATE Arabic_CI_AS NOT NULL,
+	Notes nvarchar(100) COLLATE Arabic_CI_AS NULL,
+	CONSTRAINT PK__OfficerS__AA15BEC42D086356 PRIMARY KEY (RecommendationID)
+);
+=========================================================================================================================================================================
+create this new table
+=====================
+-- NEWAFRAAD.dbo.NotMatchedWeapon definition
+
+-- Drop table
+
+-- DROP TABLE NEWAFRAAD.dbo.NotMatchedWeapon;
+
+CREATE TABLE NEWAFRAAD.dbo.NotMatchedWeapon (
+	IDKey int IDENTITY(1,1) NOT NULL,
+	Name nvarchar COLLATE Arabic_CI_AS NULL,
+	TripleNo nvarchar(13) COLLATE Arabic_CI_AS NOT NULL,
+	RecuStage nvarchar COLLATE Arabic_CI_AS NULL,
+	RecuRigion nvarchar(20) COLLATE Arabic_CI_AS NULL,
+	KnowledgeLevel nvarchar(12) COLLATE Arabic_CI_AS NULL,
+	WeaponIDs nvarchar COLLATE Arabic_CI_AS NULL,
+	Recommander nvarchar(120) COLLATE Arabic_CI_AS NULL,
+	SelectedWeapon int NULL,
+	UnitName nvarchar(200) COLLATE Arabic_CI_AS NULL,
+	CONSTRAINT PK__NotMatch__FE1D897A4DB7D72E PRIMARY KEY (IDKey,TripleNo)
+);
+=========================================================================================================================================================================
+create this new table
+=====================
+-- NEWAFRAAD.dbo.TransportLicense definition
+
+-- Drop table
+
+-- DROP TABLE NEWAFRAAD.dbo.TransportLicense;
+
+CREATE TABLE NEWAFRAAD.dbo.TransportLicense (
+	TransportLicenseID int IDENTITY(1,1) NOT NULL,
+	WeaponID int NULL,
+	SoldierIDS nvarchar(1000) COLLATE Arabic_CI_AS NULL,
+	[Date] date NULL,
+	RecuStage varchar(100) COLLATE Arabic_CI_AS NULL,
+	CONSTRAINT PK__Transpor__796B4E12C1514022 PRIMARY KEY (TransportLicenseID)
+);
+
+
+-- NEWAFRAAD.dbo.TransportLicense foreign keys
+
+ALTER TABLE NEWAFRAAD.dbo.TransportLicense ADD CONSTRAINT FK__Transport__Weapo__5FF32EF8 FOREIGN KEY (WeaponID) REFERENCES NEWAFRAAD.dbo.Weapon(WeaponID);
+
+=========================================================================================================================================================================
+create this new table
+=====================
+-- NEWAFRAAD.dbo.userTracking definition
+
+-- Drop table
+
+-- DROP TABLE NEWAFRAAD.dbo.userTracking;
+
+CREATE TABLE NEWAFRAAD.dbo.userTracking (
+	id int IDENTITY(1,1) NOT NULL,
+	userId int NULL,
+	queryMethod nvarchar(255) COLLATE Arabic_CI_AS NULL,
+	tableName nvarchar(255) COLLATE Arabic_CI_AS NULL,
+	whereCondition nvarchar(255) COLLATE Arabic_CI_AS NULL,
+	transactionDate datetimeoffset NULL,
+	message nvarchar COLLATE Arabic_CI_AS NULL,
+	CONSTRAINT PK__userTrac__3213E83F3DC5AC8C PRIMARY KEY (id)
+);
+
+
+-- NEWAFRAAD.dbo.userTracking foreign keys
+
+ALTER TABLE NEWAFRAAD.dbo.userTracking ADD CONSTRAINT FK__userTrack__userI__2942188C FOREIGN KEY (userId) REFERENCES NEWAFRAAD.dbo.Users_(UserId) ON DELETE SET NULL;
+
+
+
+=========================================================================================================================================================================
+create this new table
+=====================
+-- NEWAFRAAD.dbo.userTracking definition
+
+-- Drop table
+
+-- DROP TABLE NEWAFRAAD.dbo.userTracking;
+
+CREATE TABLE NEWAFRAAD.dbo.userTracking (
+	id int IDENTITY(1,1) NOT NULL,
+	userId int NULL,
+	queryMethod nvarchar(255) COLLATE Arabic_CI_AS NULL,
+	tableName nvarchar(255) COLLATE Arabic_CI_AS NULL,
+	whereCondition nvarchar(255) COLLATE Arabic_CI_AS NULL,
+	transactionDate datetimeoffset NULL,
+	message nvarchar COLLATE Arabic_CI_AS NULL,
+	CONSTRAINT PK__userTrac__3213E83F3DC5AC8C PRIMARY KEY (id)
+);
+
+
+-- NEWAFRAAD.dbo.userTracking foreign keys
+
+ALTER TABLE NEWAFRAAD.dbo.userTracking ADD CONSTRAINT FK__userTrack__userI__2942188C FOREIGN KEY (userId) REFERENCES NEWAFRAAD.dbo.Users_(UserId) ON DELETE SET NULL;
+===========================================================================================================================================================================
+Rename makhzanMohab to inventoryLevelUp
+===========================================================================================================================================================================
+create new table
+====================
+-- NEWAFRAAD.dbo.UnitEffecs definition
+
+-- Drop table
+
+-- DROP TABLE NEWAFRAAD.dbo.UnitEffecs;
+
+CREATE TABLE NEWAFRAAD.dbo.UnitEffecs (
+	effetId int IDENTITY(1,1) NOT NULL,
+	UnitID int NULL,
+	ID nvarchar COLLATE Arabic_CI_AS NULL,
+	[increment] bit NULL,
+	descrption nvarchar COLLATE Arabic_CI_AS NULL,
+	[type] nvarchar COLLATE Arabic_CI_AS NULL,
+	[date] date NULL,
+	CONSTRAINT PK__UnitEffe__4D419CC56B3F0207 PRIMARY KEY (effetId)
+);
+==========================================================================================================================================================================
+create New table
+=================
+-- NEWAFRAAD.dbo.Correspondences definition
+
+-- Drop table
+
+-- DROP TABLE NEWAFRAAD.dbo.Correspondences;
+
+CREATE TABLE NEWAFRAAD.dbo.Correspondences (
+	CorresId int IDENTITY(1,1) NOT NULL,
+	[Date] datetimeoffset NULL,
+	CorresNumber nvarchar(255) COLLATE Arabic_CI_AS NULL,
+	userIDs nvarchar(255) COLLATE Arabic_CI_AS NULL,
+	Direction nvarchar(255) COLLATE Arabic_CI_AS NULL,
+	Subject nvarchar(255) COLLATE Arabic_CI_AS NULL,
+	BranchSuperiorDecision nvarchar(255) COLLATE Arabic_CI_AS NULL,
+	[Procedure] nvarchar(255) COLLATE Arabic_CI_AS NULL,
+	IsFollowed bit NOT NULL,
+	isApproved bit NULL,
+	notApprovedReason nvarchar(255) COLLATE Arabic_CI_AS NULL,
+	CreatedBy nvarchar(255) COLLATE Arabic_CI_AS NULL,
+	ModifiedBy nvarchar(255) COLLATE Arabic_CI_AS NULL,
+	CONSTRAINT PK__Correspo__02A1B4737F22021A PRIMARY KEY (CorresId)
+);
